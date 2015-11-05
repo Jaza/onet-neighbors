@@ -1,0 +1,91 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <title>O*NET Neighbors</title>
+
+  <meta name="description" content="Visualization of O*NET occupations as a network graph.">
+  <meta name="author" content="Jeremy Epstein">
+
+  <!-- Mobile viewport optimized: h5bp.com/viewport -->
+  <meta name="viewport" content="width=device-width">
+
+  <!-- Network Graph icon from: -->
+  <!-- https://www.opendns.com/enterprise-security/technology/global-network/ -->
+  <link rel="shortcut icon" href="./favicon.ico">
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body id="page-top">
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header page-scroll">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+    <a class="navbar-brand" href="#page-top">O*NET Neighbors</a>
+  </div>
+
+  </div><!-- /.container -->
+</nav>
+
+<header></header>
+
+<div class="container">
+
+  <div role="main">
+
+<div id="graph-holder"></div>
+
+  </div>
+
+</div><!-- end container -->
+
+<footer>
+  <small>
+  <ul class="company">
+    <li>
+      License:  <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="https://github.com/Jaza/onet-neighbors">Source Code on GitHub</a>
+    </li>
+  </ul>
+  </small>
+</footer>
+
+<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+<div class="scroll-top page-scroll visible-xs visible-sm">
+  <a class="btn btn-primary" href="#page-top">
+    <i class="fa fa-chevron-up"></i>
+  </a>
+</div>
+
+<!-- JavaScript at the bottom for fast page loading -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+<script type="text/javascript" src="./js/occupation-list.js"></script>
+<script type="text/javascript" src="./js/occupation-neighbors.js"></script>
+
+<script type="text/javascript" src="./js/onet-neighbors-graph.js"></script>
+
+</body>
+</html>
