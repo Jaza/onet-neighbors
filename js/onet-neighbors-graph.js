@@ -63,57 +63,69 @@
       $("#hint").html("Move the mouse over any occupation to show further information or click to grab the bubble around.");
     }
 
-    networkChart.vis = d3.select("#graph-holder").append("svg:svg").attr("id", "graph").attr("width", w).attr("height", h);
+    networkChart.vis = d3.select("#graph-holder")
+      .append("svg:svg")
+      .attr("id", "graph")
+      .attr("width", w)
+      .attr("height", h);
 
-    networkChart.force = d3.layout.force().size([w, h])
-    .nodes(networkChart.nodes).links(networkChart.links)
-    .gravity(1).linkDistance(100).charge(-3000)
-    .linkStrength(function(x) {
-      return x.weight * 10
-    });
+    networkChart.force = d3.layout.force()
+      .size([w, h])
+      .nodes(networkChart.nodes)
+      .links(networkChart.links)
+      .gravity(0.1)
+      .linkDistance(function(x) {
+        return x.weight;
+      })
+      .charge(-30)
+      .linkStrength(function(x) {
+        return x.weight;
+      });
+
     networkChart.force.start();
 
-    // brings everything towards the center of the screen
-    networkChart.force2 = d3.layout.force()
-    .nodes(networkChart.labelAnchors).links(networkChart.labelAnchorLinks)
-    .gravity(0).linkDistance(0).linkStrength(8).charge(-100).size([w, h]);
-    networkChart.force2.start();
-
     var link = networkChart.vis.selectAll("line.link")
-    .data(networkChart.links).enter()
-    .append("svg:line").attr("class", "link")
-    .style("stroke", function(d, i) { return d.color });
+    .data(networkChart.links)
+    .enter()
+    .append("svg:line")
+    .attr("class", "link")
+    .style("stroke", function(d, i) {
+      return d.color });
 
     var node = networkChart.vis.selectAll("g.node")
-    .data(networkChart.force.nodes()).enter()
-    .append("svg:g").attr("id", function(d, i) { return d.label }).attr("class", "node");
-    node.append("svg:circle").attr("id",function(d, i) { return "c_"+d.label })
-    .attr("r", function(d, i) { return d.size })
-    .style("fill", function(d, i) { return d.color })
-    .style("stroke", "#FFF").style("stroke-width", 2);
-    node.call(networkChart.force.drag);
+      .data(networkChart.force.nodes())
+      .enter()
+      .append("svg:g")
+      .attr("id", function(d, i) {
+        return d.label; })
+      .attr("class", "node");
+
+    node.append("svg:circle")
+      .attr("id",function(d, i) {
+        return "c_" + d.label; })
+      .attr("r", function(d, i) {
+        return 5; })
+      .style("fill", function(d, i) { return d.color })
+      .style("stroke", "#aaa")
+      .style("stroke-width", 2);
+
+    node.append("svg:text")
+      .attr("id",function(d, i) {
+        return "t_"+d.label; })
+      .text(function(d, i) {
+        return i % 2 == 0 ? "" : d.label; })
+      .style("fill", function(d, i) {
+        return "#666"; })
+    .style("font-family", "Arial")
+    .style("font-size", 10);
+    //.on("mouseover", function(d) {
+    //  showInformation(d.label);
+    //});
+
+    //node.call(networkChart.force.drag);
+
     node.on("mouseover", function(d) {
       showInformation(d.label);
-    });
-
-    var anchorLink = networkChart.vis.selectAll("line.anchorLink")
-    .data(networkChart.labelAnchorLinks);
-
-    var anchorNode = networkChart.vis.selectAll("g.anchorNode")
-    .data(networkChart.force2.nodes()).enter()
-    .append("svg:g").attr("class", "anchorNode");
-    anchorNode.append("svg:circle")
-    .attr("id",function(d, i) { return "ct_"+d.node.label })
-    .attr("r", 0).style("fill", "#FFF");
-    anchorNode.append("svg:text")
-    .attr("id",function(d, i) { return "t_"+d.node.label })
-    .text(function(d, i) {
-      return i % 2 == 0 ? "" : d.node.label
-    }).style("fill", function(d, i) { return d.node.textcolor })
-    .style("font-family", "Arial")
-    .style("font-size", 10)
-    .on("mouseover", function(d) {
-      showInformation(d.node.label);
     });
 
     var updateLink = function() {
@@ -137,26 +149,8 @@
     }
 
     networkChart.force.on("tick", function() {
-      networkChart.force2.start();
       node.call(updateNode);
-      anchorNode.each(function(d, i) {
-        if(i % 2 == 0) {
-          d.x = d.node.x;
-          d.y = d.node.y;
-        } else {
-          var b = this.childNodes[1].getBBox();
-          var diffX = d.x - d.node.x;
-          var diffY = d.y - d.node.y;
-          var dist = Math.sqrt(diffX * diffX + diffY * diffY);
-          var shiftX = b.width * (diffX - dist) / (dist * 2);
-          shiftX = Math.max(-b.width, Math.min(0, shiftX));
-          var shiftY = 5;
-          this.childNodes[1].setAttribute("transform", "translate(" + shiftX + "," + shiftY + ")");
-        }
-      });
-      anchorNode.call(updateNode);
       link.call(updateLink);
-      anchorLink.call(updateLink);
     });
 
   }

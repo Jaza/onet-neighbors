@@ -62,8 +62,8 @@ total_neighbors = 0
 
 dist_limit = 0.3
 dist_limit_fallback = 1.1
-max_neighbors = 3
-max_neighbors_fallback = 3
+max_neighbors = 10
+max_neighbors_fallback = 10
 
 for i, o in enumerate(plot_columns):
     #print('Occupation: {0}'.format(occupation_matrix.ix[i,1]))
@@ -159,14 +159,14 @@ for i, o in enumerate(plot_columns):
 
 output_file.write('];\n')
 
-#print('min_dist: {0:.3f}'.format(min_dist))
-#print('max_dist: {0:.3f}'.format(max_dist))
-#print('min_count: {0}'.format(min_count))
-#print('max_count: {0}'.format(max_count))
-#print('min_count_fallback: {0}'.format(min_count_fallback))
-#print('max_count_fallback: {0}'.format(max_count_fallback))
-#print('zeroneighbors_count: {0}'.format(zeroneighbors_count))
-#print('onlyoneneighbor_count: {0}'.format(onlyoneneighbor_count))
-#print('distoverone_count: {0}'.format(distoverone_count))
-#print('total_fallback: {0}'.format(total_fallback))
-#print('total_neighbors: {0}'.format(total_neighbors))
+print('min_dist: {0:.3f}'.format(min_dist))
+print('max_dist: {0:.3f}'.format(max_dist))
+print('min_count: {0}'.format(min_count))
+print('max_count: {0}'.format(max_count))
+print('min_count_fallback: {0}'.format(min_count_fallback))
+print('max_count_fallback: {0}'.format(max_count_fallback))
+print('zeroneighbors_count: {0}'.format(zeroneighbors_count))
+print('onlyoneneighbor_count: {0}'.format(onlyoneneighbor_count))
+print('distoverone_count: {0}'.format(distoverone_count))
+print('total_fallback: {0}'.format(total_fallback))
+print('total_neighbors: {0}'.format(total_neighbors))
