@@ -90,7 +90,7 @@
     .append("svg:line")
     .attr("class", "link")
     .style("stroke", function(d, i) {
-      return d.color });
+      return d.color; });
 
     var node = networkChart.vis.selectAll("g.node")
       .data(networkChart.force.nodes())
